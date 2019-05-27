@@ -13,8 +13,6 @@ export default {
   },
   data () {
     return {
-      x: 0,
-      y: 0,
       snake: [41, 40],
       food: 43,
       n: null,
@@ -31,8 +29,6 @@ export default {
       let that = this
       setTimeout(function () {
         that.snake.unshift((that.n = that.snake[0] + that.direction))
-        console.log(that.n)
-        console.log(that.n % 20)
         if (
           that.snake.indexOf(that.n, 1) > 0 ||
           that.n < 0 ||
@@ -40,7 +36,7 @@ export default {
           (that.direction === 1 && that.n % 20 === 0) ||
           (that.direction === -1 && that.n % 20 === 19)
         ) {
-          return alert('finished')
+          return alert('GAME OVER')
         }
 
         that.draw(that.n, 'lime')
@@ -51,13 +47,11 @@ export default {
           that.draw(that.snake.pop(), 'black')
         }
         that.move()
-      }, 800)
+      }, 100)
     }
   },
   mounted () {
-    let opts = {
-      container: '.hello'
-    }
+    let opts = {}
     let oCanvas = document.getElementById('ca')
     this.col = (opts.width && opts.width / 20) || 20
     oCanvas.width = oCanvas.height = opts.width || 400
@@ -66,13 +60,11 @@ export default {
     this.ctx.strokeStyle = '#bfbfbf'
     let that = this
     document.onkeydown = function (evt) {
-      console.log(that.snake)
       that.direction =
         that.snake[1] - that.snake[0] ===
         (that.n = [-1, -20, 1, 20][(evt || event).keyCode - 37] || that.direction)
           ? that.direction
           : that.n
-      console.log(that.direction)
     }
     that.move()
   }

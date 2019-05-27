@@ -1,4 +1,4 @@
-# tanchishe
+# Snake
 
 ## Project setup
 ```
