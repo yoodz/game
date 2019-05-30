@@ -6,8 +6,6 @@ import Home from './components/Home.vue'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
@@ -15,7 +13,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/Snake',
+      path: '/snake',
       name: 'snake',
       component: Snake
     }

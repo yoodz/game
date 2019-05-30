@@ -2,6 +2,7 @@
   <div class="hello">
     <h1>游戏列表</h1>
     <router-link to="/snake">贪吃蛇</router-link>
+    <!-- <router-view/> -->
   </div>
 </template>
 
