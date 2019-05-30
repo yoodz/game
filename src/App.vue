@@ -1,18 +1,14 @@
 <template>
   <div id="app">
-    <Snake msg="Welcome to Your Vue.js App" count="15" />
-    <!-- <HelloWord msg="Welcome to Your Vue.js App" count="15" /> -->
+    <router-view/>
   </div>
 </template>
 
 <script>
-import Snake from './components/Snake.vue'
 
 export default {
   name: 'app',
-  components: {
-    Snake
-  }
+  components: {}
 }
 </script>
 

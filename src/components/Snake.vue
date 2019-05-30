@@ -1,5 +1,8 @@
 <template>
   <div class='hello'>
+    <div>
+      <router-link to="/">返回首页</router-link>
+    </div>
     <canvas id='ca' width='400' height='400' style='background-color: black'></canvas>
   </div>
 </template>
