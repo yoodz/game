@@ -1,8 +1,10 @@
 <template>
   <div class="hello">
+    <Circle :percent="80">
+      <span class="demo-Circle-inner" style="font-size:24px">80%</span>
+    </Circle>
     <h1>游戏列表</h1>
     <router-link to="/snake">贪吃蛇</router-link>
-    <!-- <router-view/> -->
   </div>
 </template>
 

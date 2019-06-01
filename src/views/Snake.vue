@@ -1,6 +1,7 @@
 <template>
   <div class='hello'>
-    <div>
+    <MaskLayer v-show="over" :msg="msg" v-on:titleChanged="updateTitle" :reload="reload"/>
+    <div class="return">
       <router-link to="/">返回首页</router-link>
     </div>
     <canvas id='ca' width='400' height='400' style='background-color: black'></canvas>
@@ -8,22 +9,31 @@
 </template>
 
 <script>
+import MaskLayer from '@/components/MaskLayer.vue'
+
 export default {
   name: 'Snake',
-  props: {
-    msg: String,
-    count: String
-  },
+  components: { MaskLayer },
   data () {
     return {
       snake: [41, 40],
       food: 43,
       n: null,
-      direction: 1
+      direction: 1,
+      over: false,
+      msg: '游戏结束'
     }
   },
   created () {},
   methods: {
+    updateTitle (e) {
+      console.log(e)
+      this.msg = e
+    },
+    reload () {
+      this.over = false
+      location.reload()
+    },
     draw (seat, color) {
       this.ctx.fillStyle = color
       this.ctx.fillRect((seat % 20) * 20 + 1, ~~(seat / 20) * 20 + 1, 18, 18)
@@ -39,7 +49,8 @@ export default {
           (that.direction === 1 && that.n % 20 === 0) ||
           (that.direction === -1 && that.n % 20 === 19)
         ) {
-          return alert('GAME OVER')
+          that.over = true
+          return
         }
 
         that.draw(that.n, 'lime')
@@ -76,6 +87,8 @@ export default {
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
+[v-cloak]{ display: none }
+
 h3 {
   margin: 40px 0 0;
 }
@@ -89,5 +102,9 @@ li {
 }
 a {
   color: #42b983;
+}
+
+.return {
+  margin-bottom: 20px;
 }
 </style>
