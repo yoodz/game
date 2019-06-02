@@ -5,11 +5,16 @@
       <router-link to="/">返回首页</router-link>
     </div>
     <canvas id='ca' width='400' height='400' style='background-color: black'></canvas>
+    <div class="right-content">
+      <div>总得分： {{snake.length * 10}} 分</div>
+      <div>用时：{{cost}} s</div>
+      </div>
   </div>
 </template>
 
 <script>
 import MaskLayer from '@/components/MaskLayer.vue'
+import { clearInterval } from 'timers';
 
 export default {
   name: 'Snake',
@@ -21,7 +26,8 @@ export default {
       n: null,
       direction: 1,
       over: false,
-      msg: '游戏结束'
+      msg: '游戏结束',
+      cost: 0
     }
   },
   created () {},
@@ -50,6 +56,7 @@ export default {
           (that.direction === -1 && that.n % 20 === 19)
         ) {
           that.over = true
+          clearInterval(that.interval)
           return
         }
 
@@ -61,7 +68,13 @@ export default {
           that.draw(that.snake.pop(), 'black')
         }
         that.move()
-      }, 100)
+      }, 300)
+    },
+    computeCost () {
+      let that = this
+      that.interval = setInterval(() => {
+        that.cost++
+      }, 1000)
     }
   },
   mounted () {
@@ -81,12 +94,21 @@ export default {
           : that.n
     }
     that.move()
+    that.computeCost()
   }
 }
 </script>
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
+.right-content {
+  display: inline-block;
+  overflow: hidden;
+  height: 400px;
+  margin-left: 20px;
+  font-size: 18px;
+}
+
 [v-cloak]{ display: none }
 
 h3 {
